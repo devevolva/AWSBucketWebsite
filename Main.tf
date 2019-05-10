@@ -21,8 +21,13 @@ provider "aws" {
 
 ###############################################################################
 # BUCKET ######################################################################
+variable "bucketName" {
+  description = "Bucket used to hold backup files."
+  default = "web-bucket-demo"
+}
+
 resource "aws_s3_bucket" "web-bucket" {
-  bucket           = "web-bucket"
+  bucket           = "${var.bucketName}"
   acl              = "public-read"
   policy           = "${file("s3_website_policy.json")}"
 
@@ -40,7 +45,7 @@ resource "aws_s3_bucket" "web-bucket" {
 ###############################################################################
 # FILES #######################################################################
 resource "aws_s3_bucket_object" "indexHtml" {
-  bucket       = "web-bucket"
+  bucket       = "${var.bucketName}"
   key          = "index.html"
   acl          = "public-read"
   source       = "website\\index.html"
@@ -50,7 +55,7 @@ resource "aws_s3_bucket_object" "indexHtml" {
 }
 
 resource "aws_s3_bucket_object" "errorHtml" {
-  bucket       = "web-bucket"
+  bucket       = "${var.bucketName}"
   key          = "error.html"
   acl          = "public-read"
   source       = "website\\error.html"
@@ -60,7 +65,7 @@ resource "aws_s3_bucket_object" "errorHtml" {
 }
 
 resource "aws_s3_bucket_object" "mainCss" {
-  bucket       = "web-bucket"
+  bucket       = "${var.bucketName}"
   key          = "main.css"
   acl          = "public-read"
   source       = "website\\main.css"
@@ -70,7 +75,7 @@ resource "aws_s3_bucket_object" "mainCss" {
 }
 
 resource "aws_s3_bucket_object" "normalizeCss" {
-  bucket       = "web-bucket"
+  bucket       = "${var.bucketName}"
   key          = "normalize.css"
   acl          = "public-read"
   source       = "website\\normalize.css"
@@ -80,7 +85,7 @@ resource "aws_s3_bucket_object" "normalizeCss" {
 }
 
 resource "aws_s3_bucket_object" "scriptsJs" {
-  bucket       = "web-bucket"
+  bucket       = "${var.bucketName}"
   key          = "scripts.js"
   acl          = "public-read"
   source       = "website\\scripts.js"
