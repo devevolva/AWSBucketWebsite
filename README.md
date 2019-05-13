@@ -22,4 +22,7 @@ variable "bucketName" {
 
 <br />
 
-web-bucket-demo.s3-website-us-east-1.amazonaws.com
+#### Browse Website
+Replace "web-bucket-demo" with your unique bucket name:
+
+    https://web-bucket-demo.s3-website-us-east-1.amazonaws.com
